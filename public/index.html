@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0d12">
+  <title>Rangel Métricas</title>
+  <meta name="description" content="Inteligência de produtos do Mercado Livre.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <script>try{if(localStorage.getItem('rangel-theme')==='light')document.documentElement.classList.add('light')}catch(e){}</script>
+</head>
+<body>
+  <div class="app-shell">
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a class="brand" href="#/dashboard" aria-label="Rangel Métricas">
+          <span class="brand-icon">R</span>
+          <span class="brand-copy"><strong>Rangel</strong><small>Métricas</small></span>
+        </a>
+        <button class="icon-btn sidebar-close" id="sidebarClose" type="button" aria-label="Fechar menu">×</button>
+      </div>
+      <div class="workspace">
+        <span class="workspace-dot"></span><span>Operação</span><span class="workspace-caret">⌄</span>
+      </div>
+      <nav class="nav" id="nav" aria-label="Navegação principal">
+        <a href="#/dashboard" data-route="dashboard"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+        <a href="#/produtos" data-route="produtos"><span class="nav-icon">▦</span><span>Produtos</span></a>
+        <a href="#/pesquisa" data-route="pesquisa"><span class="nav-icon">⌕</span><span>Pesquisa de mercado</span></a>
+        <a href="#/precificador" data-route="precificador"><span class="nav-icon">⌁</span><span>Precificador</span></a>
+        <a href="#/historico" data-route="historico"><span class="nav-icon">↶</span><span>Histórico</span></a>
+        <a href="#/configuracoes" data-route="configuracoes"><span class="nav-icon">⚙</span><span>Configurações</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="theme-toggle" id="themeBtn" type="button">
+          <span class="theme-label"><span class="nav-icon">◐</span><span id="themeText">Modo escuro</span></span>
+          <span class="switch" id="themeSwitch"></span>
+        </button>
+        <a class="connection-card" id="connBadge" href="#/configuracoes">
+          <span class="status-dot"></span><span class="connection-text">Verificando…</span><span class="chevron">›</span>
+        </a>
+        <div class="sidebar-footnote">Rangel Métricas <span>•</span> Dados reais</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Abrir menu">☰</button>
+        <div class="topbar-context" id="topContext">
+          <span class="topbar-kicker">RANGEL MÉTRICAS</span>
+          <span class="topbar-page">Dashboard</span>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn primary top-analyze" id="topAnalyze" type="button"><span>＋</span> Analisar produto</button>
+        </div>
+      </header>
+      <div class="content" id="view"><div class="page-loader"><span></span><span></span><span></span></div></div>
+    </main>
+  </div>
+  <div class="modal-root" id="modalRoot"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><div class="noscript">O Rangel Métricas precisa de JavaScript habilitado.</div></noscript>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

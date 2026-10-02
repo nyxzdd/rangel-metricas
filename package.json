@@ -1,0 +1,13 @@
+{
+  "name": "rangel-metricas",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Plataforma de análise de produtos do Mercado Livre",
+  "engines": { "node": ">=18.17" },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node scripts/dev.js",
+    "test": "node --test test/rangel.test.js test/dev.test.js"
+  }
+}
