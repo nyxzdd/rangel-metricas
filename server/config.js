@@ -26,6 +26,8 @@ export const config = {
   get port() { return Number(env('PORT', '3000')); },
   get host() { return env('HOST', '127.0.0.1'); },
   get appUrl() { return env('APP_URL', `http://localhost:${this.port}`); },
+  get accessUser() { return env('ACCESS_USER', 'rangel'); },
+  get accessPassword() { return env('ACCESS_PASSWORD'); },
   get dataDir() { return path.resolve(ROOT, env('DATA_DIR', 'data')); },
   get mlClientId() { const v = env('ML_CLIENT_ID'); return PLACEHOLDER.test(v) ? '' : v; },
   get mlClientSecret() { const v = env('ML_CLIENT_SECRET'); return PLACEHOLDER.test(v) ? '' : v; },
