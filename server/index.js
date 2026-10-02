@@ -12,6 +12,25 @@ const SHARED = path.join(ROOT, 'shared');
 
 // Proteção contra requisições de outros sites (CSRF): mutações vindas de navegador precisam ter a mesma origem.
 // A rota de ingestão da extensão é a exceção (autenticada por chave própria e liberada por CORS).
+function accessAllowed(req, res, pathname) {
+  if (!config.accessPassword || pathname === '/api/health') return true;
+  const header = req.headers.authorization || '';
+  if (header.startsWith('Basic ')) {
+    try {
+      const raw = Buffer.from(header.slice(6), 'base64').toString('utf8');
+      const [user, ...rest] = raw.split(':');
+      if (user === config.accessUser && rest.join(':') === config.accessPassword) return true;
+    } catch {}
+  }
+  res.writeHead(401, {
+    'content-type': 'text/plain; charset=utf-8',
+    'www-authenticate': 'Basic realm="Rangel Métricas"',
+    'cache-control': 'no-store'
+  });
+  res.end('Acesso protegido. Informe as credenciais do Rangel Métricas.');
+  return false;
+}
+
 function originAllowed(req, pathname) {
   if (req.method === 'GET' || req.method === 'HEAD' || req.method === 'OPTIONS') return true;
   if (pathname === '/api/products/ingest' || pathname === '/webhooks') return true;
@@ -46,6 +65,7 @@ export function createServer() {
     const url = new URL(req.url, 'http://localhost');
     const { pathname } = url;
     try {
+      if (!accessAllowed(req, res, pathname)) return;
       if (pathname === '/api/products/ingest') {
         res.setHeader('access-control-allow-origin', '*');
         res.setHeader('access-control-allow-headers', 'content-type,x-rangel-key');
